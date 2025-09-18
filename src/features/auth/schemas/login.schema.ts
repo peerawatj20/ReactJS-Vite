@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { type SchemaType, createI18nSchema } from '@/shared/utils/schemaUtils';
+import { type SchemaType, createI18nSchema } from '@/shared/utils/schema.utils';
 
 export const loginSchema = createI18nSchema((t) => {
   return z.object({

@@ -1,14 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { authService } from '@/shared/services/authService';
+import { authService } from '@/shared/services/auth.service';
+import type { User } from '@/shared/types/user';
 
-import type { LoginSchemaType } from '../schemas/loginSchema';
-
-// กำหนด Type ของข้อมูล User และ State
-interface User {
-  id: string;
-  email: string;
-}
+import type { LoginSchemaType } from '../schemas/login.schema';
 
 interface AuthState {
   user: User | null;
@@ -17,7 +12,6 @@ interface AuthState {
   error: string | null;
 }
 
-// กำหนด State เริ่มต้น
 const initialState: AuthState = {
   user: null,
   token: null,
@@ -28,16 +22,11 @@ const initialState: AuthState = {
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (credentials: LoginSchemaType) => {
-    const response = await authService.login(
-      credentials.email,
-      credentials.password,
-    );
-
-    return response.data; // e.g., { user, token }
+    const data = await authService.login(credentials);
+    return data;
   },
 );
 
-// 2. สร้าง Slice
 const authSlice = createSlice({
   name: 'auth',
   initialState,

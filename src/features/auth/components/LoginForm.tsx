@@ -6,7 +6,7 @@ import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import Label from '@/shared/ui/Label';
 
-import { type LoginSchemaType, loginSchema } from '../schemas/loginSchema';
+import { type LoginSchemaType, loginSchema } from '../schemas/login.schema';
 
 const LoginForm = () => {
   const { i18n } = useTranslation();

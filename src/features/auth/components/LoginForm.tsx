@@ -1,38 +1,33 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, type LoginSchemaType } from "../schemas/loginSchema";
-import Label from "../../../shared/ui/Label";
-import Input from "../../../shared/ui/Input";
-import Button from "../../../shared/ui/Button";
-import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
-import useAppForm from "@/shared/hooks/ีuseAppForm";
+import { useTranslation } from 'react-i18next';
 
-// Import reusable components
+import useAppForm from '@/shared/hooks/useAppForm';
+import { useI18nZodResolver } from '@/shared/hooks/useI18nZodResolver';
+import Button from '@/shared/ui/Button';
+import Input from '@/shared/ui/Input';
+import Label from '@/shared/ui/Label';
+
+import { type LoginSchemaType, loginSchema } from '../schemas/loginSchema';
 
 const LoginForm = () => {
-  const { t, i18n } = useTranslation();
-
-  const memoizedSchema = useMemo(() => {
-    return loginSchema(t); // 👈 เรียกใช้ Factory เพื่อสร้าง schema ที่แปลแล้ว
-  }, [t]);
+  const { i18n } = useTranslation();
 
   const { control, handleSubmit } = useAppForm<LoginSchemaType>({
-    resolver: zodResolver(memoizedSchema),
+    resolver: useI18nZodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
   const onSubmit = (data: LoginSchemaType) => {
-    console.log("Login successful with:", data);
+    console.log('Login successful with:', data);
     alert(`ยินดีต้อนรับ, ${data.email}!`);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <Button onClick={() => i18n.changeLanguage("en")}>English</Button>
-      <Button onClick={() => i18n.changeLanguage("th")}>ไทย</Button>
+      <Button onClick={() => i18n.changeLanguage('en')}>English</Button>
+      <Button onClick={() => i18n.changeLanguage('th')}>ไทย</Button>
       <div>
         <Label htmlFor="email">E-mail</Label>
         <Input<LoginSchemaType>

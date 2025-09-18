@@ -1,9 +1,9 @@
 import {
-  type FieldValues,
-  type Path,
   type Control,
   Controller,
-} from "react-hook-form";
+  type FieldValues,
+  type Path,
+} from 'react-hook-form';
 
 // กำหนด Type ของ props ให้ยืดหยุ่น
 type InputProps<T extends FieldValues> = {
@@ -15,7 +15,7 @@ type InputProps<T extends FieldValues> = {
 
 const Input = <T extends FieldValues>({
   name,
-  type = "text",
+  type = 'text',
   placeholder,
   control,
 }: InputProps<T>) => {
@@ -33,7 +33,7 @@ const Input = <T extends FieldValues>({
                 type={type}
                 placeholder={placeholder}
                 className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                  fieldState.error ? "border-red-500" : "border-gray-300"
+                  fieldState.error ? 'border-red-500' : 'border-gray-300'
                 }`}
               />
               {fieldState.error && (

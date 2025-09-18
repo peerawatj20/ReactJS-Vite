@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
 interface ButtonProps {
   children: React.ReactNode;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   fullWidth?: boolean;
   onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  type = "button",
+  type = 'button',
   fullWidth = false,
   onClick,
 }) => {
@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       onClick={onClick}
       className={`flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-        fullWidth ? "w-full" : ""
+        fullWidth ? 'w-full' : ''
       }`}
     >
       {children}

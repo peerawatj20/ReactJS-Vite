@@ -1,6 +1,6 @@
 {
   "validation": {
-    "email_invalid": "รูปแบบอีเมลไม่ถูกต้อง",
+    "invalid_email": "รูปแบบอีเมลไม่ถูกต้อง",
     "password_required": "กรุณากรอกรหัสผ่าน"
   }
 }

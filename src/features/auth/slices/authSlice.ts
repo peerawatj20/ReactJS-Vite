@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import type { LoginSchemaType } from "../schemas/loginSchema";
-import { authService } from "@/shared/services/authService";
+import { authService } from '@/shared/services/authService';
+
+import type { LoginSchemaType } from '../schemas/loginSchema';
 
 // กำหนด Type ของข้อมูล User และ State
 interface User {
@@ -12,7 +13,7 @@ interface User {
 interface AuthState {
   user: User | null;
   token: string | null;
-  status: "idle" | "loading" | "succeeded" | "failed";
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
@@ -20,25 +21,25 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   token: null,
-  status: "idle",
+  status: 'idle',
   error: null,
 };
 
 export const loginUser = createAsyncThunk(
-  "auth/loginUser",
+  'auth/loginUser',
   async (credentials: LoginSchemaType) => {
     const response = await authService.login(
       credentials.email,
-      credentials.password
+      credentials.password,
     );
 
     return response.data; // e.g., { user, token }
-  }
+  },
 );
 
 // 2. สร้าง Slice
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     // Reducers ปกติ (Sync) สำหรับจัดการ State โดยตรง
@@ -51,17 +52,17 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message || "Login failed";
+        state.status = 'failed';
+        state.error = action.error.message || 'Login failed';
       });
   },
 });

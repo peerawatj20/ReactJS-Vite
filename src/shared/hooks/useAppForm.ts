@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react";
-import { useForm, type FieldValues, type UseFormProps } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useEffect, useRef } from 'react';
+import { type FieldValues, type UseFormProps, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 const useAppForm = <TFieldValues extends FieldValues = FieldValues>(
-  props: UseFormProps<TFieldValues>
+  props: UseFormProps<TFieldValues>,
 ) => {
   const { i18n } = useTranslation();
 

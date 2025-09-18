@@ -1,11 +1,13 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import enTranslation from "@/locales/en/translation.json";
-import thTranslation from "@/locales/th/translation.json";
+import { initReactI18next } from 'react-i18next';
+
+import i18n from 'i18next';
+
+import enTranslation from '@/locales/en/translation.json';
+import thTranslation from '@/locales/th/translation.json';
 
 i18n.use(initReactI18next).init({
   debug: true,
-  fallbackLng: "en",
+  fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
   },

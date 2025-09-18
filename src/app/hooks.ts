@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import type { TypedUseSelectorHook } from "react-redux";
-import type { RootState, AppDispatch } from "./store";
+import { useDispatch, useSelector } from 'react-redux';
+import type { TypedUseSelectorHook } from 'react-redux';
+
+import type { AppDispatch, RootState } from './store';
 
 // สร้าง hook `useAppDispatch` ที่มี Type ของ AppDispatch ติดไปด้วย
 // ทำให้ dispatch ของคุณรู้จัก thunk actions โดยอัตโนมัติ

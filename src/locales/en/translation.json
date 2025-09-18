@@ -1,0 +1,6 @@
+{
+  "validation": {
+    "email_invalid": "Invalid email format",
+    "password_required": "Password is required"
+  }
+}

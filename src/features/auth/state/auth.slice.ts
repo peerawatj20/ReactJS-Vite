@@ -3,19 +3,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authService } from '@/shared/services/auth.service';
 import { showNotification } from '@/shared/state/notification.slice';
 import type { User } from '@/shared/types/user';
+import { getErrorMessage } from '@/shared/utils/error.utils';
 
 import type { LoginSchemaType } from '../schemas/login.schema';
 
 interface AuthState {
   user: User | null;
   token: string | null;
-  error: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
   token: null,
-  error: null,
 };
 
 export const loginUser = createAsyncThunk(
@@ -28,11 +27,11 @@ export const loginUser = createAsyncThunk(
       });
 
       return data;
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Login failed';
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
       dispatch(
         showNotification({
-          message: 'Login failed!',
+          message: errorMessage,
           type: 'error',
         }),
       );
@@ -53,17 +52,10 @@ const authSlice = createSlice({
   },
   // 3. extraReducers สำหรับจัดการ State ที่มาจาก Thunk (Async)
   extraReducers: (builder) => {
-    builder
-      .addCase(loginUser.pending, (state) => {
-        state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.error = action.error.message || 'Login failed';
-      });
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    });
   },
 });
 

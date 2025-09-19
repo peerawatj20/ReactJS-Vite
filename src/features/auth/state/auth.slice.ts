@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { authService } from '@/shared/services/auth.service';
+import { showNotification } from '@/shared/state/notification.slice';
 import type { User } from '@/shared/types/user';
 
 import type { LoginSchemaType } from '../schemas/login.schema';
@@ -8,25 +9,35 @@ import type { LoginSchemaType } from '../schemas/login.schema';
 interface AuthState {
   user: User | null;
   token: string | null;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
   token: null,
-  status: 'idle',
   error: null,
 };
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async (credentials: LoginSchemaType) => {
-    const data = await authService.login({
-      email: credentials.email,
-      password: credentials.password,
-    });
-    return data;
+  async (credentials: LoginSchemaType, { dispatch, rejectWithValue }) => {
+    try {
+      const data = await authService.login({
+        email: credentials.email,
+        password: credentials.password,
+      });
+
+      return data;
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || 'Login failed';
+      dispatch(
+        showNotification({
+          message: 'Login failed!',
+          type: 'error',
+        }),
+      );
+      return rejectWithValue(errorMessage);
+    }
   },
 );
 
@@ -44,16 +55,13 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.status = 'loading';
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.status = 'succeeded';
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.status = 'failed';
         state.error = action.error.message || 'Login failed';
       });
   },

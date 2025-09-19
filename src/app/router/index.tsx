@@ -1,21 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import LoginPage from '../../pages/LoginPage';
+import { RootLayout } from '@/widgets/layout/RootLayout';
+
+import LoginPage from '@/pages/LoginPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LoginPage />, // Layout หลัก
+    element: <RootLayout />,
+    children: [
+      {
+        path: '/',
+        element: <LoginPage />,
+      },
+    ],
   },
-  //   {
-  //     path: "/",
-  //     element: <Root />, // Layout หลัก
-  //     children: [
-  //       {
-  //         path: "/",
-  //         element: <HomePage />,
-  //       },
-  //     ],
-  //   },
 ]);
 export default router;

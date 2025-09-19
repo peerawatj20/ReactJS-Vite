@@ -1,15 +1,19 @@
 import { useTranslation } from 'react-i18next';
 
+import { useAppDispatch } from '@/app/hooks';
+
 import useAppForm from '@/shared/hooks/useAppForm';
 import { useI18nZodResolver } from '@/shared/hooks/useI18nZodResolver';
-import Button from '@/shared/ui/Button';
-import Input from '@/shared/ui/Input';
-import Label from '@/shared/ui/Label';
+import Button from '@/shared/ui/common/Button';
+import Input from '@/shared/ui/common/Input';
+import Label from '@/shared/ui/common/Label';
 
 import { type LoginSchemaType, loginSchema } from '../schemas/login.schema';
+import { loginUser } from '../state/auth.slice';
 
 const LoginForm = () => {
   const { i18n } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const { control, handleSubmit } = useAppForm<LoginSchemaType>({
     resolver: useI18nZodResolver(loginSchema),
@@ -20,8 +24,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginSchemaType) => {
-    console.log('Login successful with:', data);
-    alert(`ยินดีต้อนรับ, ${data.email}!`);
+    dispatch(loginUser(data));
   };
 
   return (

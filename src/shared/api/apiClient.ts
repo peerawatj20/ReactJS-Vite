@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
-
+import { useAppDispatch } from '@/app/hooks';
 import axios, { AxiosError } from 'axios';
 
-import { showNotification } from '../state/notification.slice';
+import { pushNotification } from '../state/notification.slice';
 
 const apiClient = axios.create({
   baseURL: 'https://api.example.com/v1', // Your API base URL
@@ -25,7 +24,7 @@ apiClient.interceptors.request.use(
     if (axios.isAxiosError(error)) {
       const status = error.response?.status;
       const errorMessage = error.message || 'An error occurred';
-      const dispatch = useDispatch();
+      const dispatch = useAppDispatch();
 
       switch (status) {
         case 401: // Unauthorized
@@ -34,7 +33,7 @@ apiClient.interceptors.request.use(
 
         case 403: // Forbidden
           dispatch(
-            showNotification({
+            pushNotification({
               message: 'คุณไม่มีสิทธิ์เข้าถึง',
               type: 'error',
             }),
@@ -43,7 +42,7 @@ apiClient.interceptors.request.use(
 
         case 404: // Not Found
           dispatch(
-            showNotification({
+            pushNotification({
               message: 'คุณไม่มีสิทธิ์เข้าถึงข้อมูลส่วนนี้',
               type: 'error',
             }),
@@ -52,9 +51,10 @@ apiClient.interceptors.request.use(
 
         case 500: // Internal Server Error
           // - แสดง Notification ว่า "เกิดข้อผิดพลาดที่ Server"
+
           dispatch(
-            showNotification({
-              message: 'เกิดข้อผิดพลาดที่ Server กรุณาลองใหม่อีกครั้ง',
+            pushNotification({
+              message: 'เกิดข้อผิดพลาดที่ Server',
               type: 'error',
             }),
           );

@@ -8,10 +8,6 @@ import loadingReducer from '@/shared/state/loading.slice';
 import notificationReducer from '@/shared/state/notification.slice';
 
 import authReducer from '../features/auth/state/auth.slice';
-import { loadingMiddleware } from './middleware/loadingMiddleware';
-import { notificationListenerMiddleware } from './middleware/notificationListener';
-
-// 👈 Import
 
 export const store = configureStore({
   reducer: {
@@ -19,11 +15,6 @@ export const store = configureStore({
     notification: notificationReducer,
     auth: authReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      loadingMiddleware,
-      notificationListenerMiddleware.middleware,
-    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { authService } from '@/shared/services/auth.service';
-import { showNotification } from '@/shared/state/notification.slice';
+import { pushNotification } from '@/shared/state/notification.slice';
 import type { User } from '@/shared/types/user';
 import { getErrorMessage } from '@/shared/utils/error.utils';
+import { withLoadingHandler } from '@/shared/utils/loading.utils';
 
 import type { LoginSchemaType } from '../schemas/login.schema';
 
@@ -19,25 +20,27 @@ const initialState: AuthState = {
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async (credentials: LoginSchemaType, { dispatch, rejectWithValue }) => {
-    try {
-      const data = await authService.login({
-        email: credentials.email,
-        password: credentials.password,
-      });
+  withLoadingHandler(
+    async (credentials: LoginSchemaType, { dispatch, rejectWithValue }) => {
+      try {
+        const data = await authService.login({
+          email: credentials.email,
+          password: credentials.password,
+        });
 
-      return data;
-    } catch (error) {
-      const errorMessage = getErrorMessage(error);
-      dispatch(
-        showNotification({
-          message: errorMessage,
-          type: 'error',
-        }),
-      );
-      return rejectWithValue(errorMessage);
-    }
-  },
+        return data;
+      } catch (error) {
+        const errorMessage = getErrorMessage(error);
+        dispatch(
+          pushNotification({
+            message: errorMessage,
+            type: 'error',
+          }),
+        );
+        return rejectWithValue(errorMessage);
+      }
+    },
+  ),
 );
 
 const authSlice = createSlice({

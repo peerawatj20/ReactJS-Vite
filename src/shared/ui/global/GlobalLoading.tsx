@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/app/hooks';
 
-import { type RootState } from '@/app/store';
+import { selectIsLoading } from '@/shared/state/loading.slice';
 
 const GlobalLoading = () => {
-  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
+  const isLoading = useAppSelector(selectIsLoading);
 
   if (!isLoading) {
     return null;

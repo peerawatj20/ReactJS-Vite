@@ -22,7 +22,10 @@ const initialState: AuthState = {
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (credentials: LoginSchemaType) => {
-    const data = await authService.login(credentials);
+    const data = await authService.login({
+      email: credentials.email,
+      password: credentials.password,
+    });
     return data;
   },
 );

@@ -11,7 +11,6 @@ let pendingRequests = 0;
 
 export const loadingMiddleware: Middleware = (store) => (next) => (action) => {
   const { dispatch } = store;
-  console.log(action);
   // 1. ใช้ isPending เพื่อตรวจสอบ Action ที่มาจาก createAsyncThunk เท่านั้น
   if (isPending(action)) {
     if (pendingRequests === 0) {

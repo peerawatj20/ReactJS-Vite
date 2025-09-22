@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { authService } from '@/shared/services/auth.service';
 import { pushNotification } from '@/shared/state/notification.slice';
-import type { User } from '@/shared/types/user';
+import type { User } from '@/shared/types/user.types';
 import { getErrorMessage } from '@/shared/utils/error.utils';
 import { withLoadingHandler } from '@/shared/utils/loading.utils';
 

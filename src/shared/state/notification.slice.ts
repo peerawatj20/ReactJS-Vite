@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import type { NotificationType } from '../types/notification';
+import type { NotificationType } from '../types/notification.types';
 
 // Payload ที่รับเข้ามาตอนสร้าง Notification
 export interface NotificationPayload {

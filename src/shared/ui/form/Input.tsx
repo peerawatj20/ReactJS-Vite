@@ -1,3 +1,4 @@
+import type { InputHTMLAttributes } from 'react';
 import {
   type Control,
   Controller,
@@ -11,6 +12,7 @@ type InputProps<T extends FieldValues> = {
   type?: string;
   placeholder?: string;
   control: Control<T>;
+  inputProps?: InputHTMLAttributes<HTMLInputElement>;
 };
 
 const Input = <T extends FieldValues>({
@@ -18,6 +20,7 @@ const Input = <T extends FieldValues>({
   type = 'text',
   placeholder,
   control,
+  inputProps,
 }: InputProps<T>) => {
   return (
     <div className="mt-1">
@@ -30,6 +33,7 @@ const Input = <T extends FieldValues>({
             <div>
               <input
                 {...field}
+                {...inputProps}
                 type={type}
                 placeholder={placeholder}
                 className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${

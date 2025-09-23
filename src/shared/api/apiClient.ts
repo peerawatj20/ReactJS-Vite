@@ -2,7 +2,7 @@ import i18n from '@/app/i18n';
 import axios, { AxiosError } from 'axios';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: 'http://localhost:3000/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -40,7 +40,7 @@ apiClient.interceptors.response.use(
         case 401: // Unauthorized
           // ควรมีการเคลียร์ข้อมูล user/token ก่อน redirect
           // localStorage.removeItem('authToken');
-          window.location.href = '/login';
+          // window.location.href = '/login';
           break;
 
         case 403: // Forbidden

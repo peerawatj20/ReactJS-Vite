@@ -6,8 +6,8 @@ import useAppForm from '@/shared/hooks/useAppForm';
 import { useI18nZodResolver } from '@/shared/hooks/useI18nZodResolver';
 import { logout } from '@/shared/state/auth.slice';
 import Button from '@/shared/ui/common/Button';
-import Input from '@/shared/ui/common/Input';
 import Label from '@/shared/ui/common/Label';
+import Input from '@/shared/ui/form/Input';
 
 import { type LoginSchemaType, loginSchema } from '../schemas/login.schema';
 import { loginFlow } from '../state/authFlow.thunk';
@@ -44,6 +44,7 @@ const LoginForm = () => {
           type="email"
           placeholder="you@example.com"
           control={control}
+          inputProps={{ maxLength: 50 }}
         />
       </div>
 
@@ -54,6 +55,7 @@ const LoginForm = () => {
           type="password"
           placeholder="••••••••"
           control={control}
+          inputProps={{ maxLength: 12 }}
         />
       </div>
 

@@ -10,7 +10,7 @@ export const loginSchema = createI18nSchema((t) => {
     password: z
       .string()
       .min(
-        8,
+        1,
         t('translation:features.auth.login.validation.password_required'),
       ),
   });

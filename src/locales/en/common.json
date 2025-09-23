@@ -1,0 +1,14 @@
+{
+  "error": {
+    "api": {
+      "network": "Network error, please try again later",
+      "unknown": "An unknown error occurred",
+      "timeout": "The request timed out, please try again",
+      "unauthorized": "You are not authorized to perform this action",
+      "forbidden": "You do not have permission to access this resource",
+      "not_found": "The requested resource was not found",
+      "server_error": "A server error occurred, please try again later"
+    },
+    "action_failed": "{{name}} failed"
+  }
+}

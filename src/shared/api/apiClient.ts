@@ -1,3 +1,4 @@
+import i18n from '@/app/i18n';
 import axios, { AxiosError } from 'axios';
 
 const apiClient = axios.create({
@@ -43,22 +44,22 @@ apiClient.interceptors.response.use(
           break;
 
         case 403: // Forbidden
-          error.message = 'คุณไม่มีสิทธิ์เข้าถึง';
+          error.message = i18n.t('common:error.api.forbidden');
           break;
 
         case 404: // Not Found
-          error.message = 'ไม่พบข้อมูลที่ร้องขอ';
+          error.message = i18n.t('common:error.api.not_found');
           break;
 
         case 500: // Internal Server Error
-          error.message = 'เกิดข้อผิดพลาดที่เซิร์ฟเวอร์';
+          error.message = i18n.t('common:error.api.server_error');
           break;
 
         default:
           console.error(
             `API Error - Status: ${status}, Message: ${errorMessage}`,
           );
-          error.message = 'เกิดข้อผิดพลาดไม่ทราบสาเหตุ';
+          error.message = i18n.t('common:error.api.unknown');
           break;
       }
     } else {

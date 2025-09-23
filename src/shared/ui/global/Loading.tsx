@@ -2,7 +2,7 @@ import { useAppSelector } from '@/app/hooks';
 
 import { selectIsLoading } from '@/shared/state/loading.slice';
 
-const GlobalLoading = () => {
+const Loading = () => {
   const isLoading = useAppSelector(selectIsLoading);
 
   if (!isLoading) {
@@ -21,4 +21,4 @@ const GlobalLoading = () => {
   );
 };
 
-export default GlobalLoading;
+export default Loading;

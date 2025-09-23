@@ -1,6 +1,13 @@
 {
-  "validation": {
-    "invalid_email": "รูปแบบอีเมลไม่ถูกต้อง",
-    "password_required": "กรุณากรอกรหัสผ่าน"
+  "features": {
+    "auth": {
+      "login": {
+        "flowName": "การเข้าสู่ระบบ",
+        "validation": {
+          "invalid_email": "รูปแบบอีเมลไม่ถูกต้อง",
+          "password_required": "กรุณากรอกรหัสผ่าน"
+        }
+      }
+    }
   }
 }

@@ -1,6 +1,13 @@
 {
-  "validation": {
-    "invalid_email": "Invalid email format",
-    "password_required": "Password is required"
+  "features": {
+    "auth": {
+      "login": {
+        "flowName": "Login",
+        "validation": {
+          "invalid_email": "Invalid email format",
+          "password_required": "Password is required"
+        }
+      }
+    }
   }
 }

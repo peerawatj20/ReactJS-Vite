@@ -5,6 +5,7 @@ import type { NotificationType } from '../types/notification.types';
 
 // Payload ที่รับเข้ามาตอนสร้าง Notification
 export interface NotificationPayload {
+  title: string;
   message: string;
   type: NotificationType;
   duration?: number;

@@ -6,6 +6,7 @@ import { pushNotification } from '../state/notification.slice';
 import { getErrorMessage } from './error.utils';
 
 export const withAppHandler = <Returned, ThunkArg = void>(
+  title: string,
   payloadCreator: AsyncThunkPayloadCreator<Returned, ThunkArg>,
 ): AsyncThunkPayloadCreator<Returned, ThunkArg> => {
   return async (arg, thunkAPI): Promise<Returned> => {
@@ -20,6 +21,7 @@ export const withAppHandler = <Returned, ThunkArg = void>(
       const errorMessage = getErrorMessage(error);
       dispatch(
         pushNotification({
+          title: `${title} Failed`,
           message: errorMessage,
           type: 'error',
         }),

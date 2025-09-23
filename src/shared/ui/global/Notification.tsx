@@ -32,7 +32,17 @@ const NotificationList = () => {
             exit={{ opacity: 0, x: 50, transition: { duration: 0.3 } }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
-            <span>{notification.message}</span>
+            <div className="flex-grow">
+              {/* 1. แสดง title ถ้ามี */}
+              {notification.title && (
+                <strong className="block text-sm font-bold">
+                  {notification.title}
+                </strong>
+              )}
+              {/* 2. แสดง message */}
+              <span className="block text-sm">{notification.message}</span>
+            </div>
+
             <button
               onClick={() =>
                 dispatch(removeNotification({ id: notification.id }))

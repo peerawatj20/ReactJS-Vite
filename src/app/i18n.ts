@@ -24,7 +24,7 @@ i18n
     },
     ns: ['common', 'translation'],
     defaultNS: 'common',
-    supportedLngs: ['en', 'th', 'cimode'],
+    supportedLngs: ['en', 'th'],
     resources: {
       en: {
         common: enCommon,

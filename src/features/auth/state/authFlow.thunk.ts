@@ -6,10 +6,6 @@ import { withAppFlowHandler } from '@/shared/utils/thunk.utils';
 
 import type { LoginSchemaType } from '../schemas/login.schema';
 
-console.log(
-  'translation:features.auth.login.flowName',
-  i18n.t('translation:features.auth.login.flowName', { lng: 'cimode' }),
-);
 export const loginFlow = createAsyncThunk(
   'auth/loginFlow',
   withAppFlowHandler(

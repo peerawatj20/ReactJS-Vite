@@ -4,10 +4,9 @@ import {
   configureStore,
 } from '@reduxjs/toolkit';
 
+import authReducer from '@/shared/state/auth.slice';
 import loadingReducer from '@/shared/state/loading.slice';
 import notificationReducer from '@/shared/state/notification.slice';
-
-import authReducer from '../features/auth/state/auth.slice';
 
 export const store = configureStore({
   reducer: {

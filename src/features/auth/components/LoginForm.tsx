@@ -9,7 +9,7 @@ import Input from '@/shared/ui/common/Input';
 import Label from '@/shared/ui/common/Label';
 
 import { type LoginSchemaType, loginSchema } from '../schemas/login.schema';
-import { loginUser } from '../state/auth.slice';
+import { loginFlow } from '../state/authFlow.thunk';
 
 const LoginForm = () => {
   const { i18n } = useTranslation();
@@ -24,7 +24,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginSchemaType) => {
-    dispatch(loginUser(data));
+    dispatch(loginFlow(data));
   };
 
   return (

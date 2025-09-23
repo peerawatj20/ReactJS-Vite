@@ -7,15 +7,18 @@ import { RouterProvider } from 'react-router-dom';
 
 import '@/app/i18n';
 import '@/styles/index.css';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import router from './app/router';
-import { store } from './app/store';
+import { persistor, store } from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 );

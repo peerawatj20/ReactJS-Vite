@@ -6,35 +6,38 @@ import type {
   RefreshResponse,
 } from '@/shared/services/auth.types';
 
+import type { ServiceMethod } from '../types/service.types';
+
 const collectionPath = '/auth';
 
-const login = async (data: LoginRequest): Promise<LoginResponse> => {
-  try {
-    const response = await apiClient.post<LoginResponse>(
-      `${collectionPath}/login`,
-      data,
-    );
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching login:', error);
-    throw error;
-  }
-};
+interface AuthService {
+  login: ServiceMethod<LoginRequest, LoginResponse>;
+  refresh: ServiceMethod<RefreshRequest, RefreshResponse>;
+}
 
-const refresh = async (data: RefreshRequest): Promise<RefreshResponse> => {
-  try {
-    const response = await apiClient.post<RefreshResponse>(
-      `${collectionPath}/refresh`,
-      data,
-    );
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching refresh:', error);
-    throw error;
-  }
-};
-
-export const authService = {
-  login,
-  refresh,
+export const authService: AuthService = {
+  login: async (data) => {
+    try {
+      const response = await apiClient.post<LoginResponse>(
+        `${collectionPath}/login`,
+        data,
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching login:', error);
+      throw error;
+    }
+  },
+  refresh: async (data) => {
+    try {
+      const response = await apiClient.post<RefreshResponse>(
+        `${collectionPath}/refresh`,
+        data,
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching refresh:', error);
+      throw error;
+    }
+  },
 };

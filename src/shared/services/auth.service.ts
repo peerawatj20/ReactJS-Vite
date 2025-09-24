@@ -17,27 +17,17 @@ interface AuthService {
 
 export const authService: AuthService = {
   login: async (data) => {
-    try {
-      const response = await apiClient.post<LoginResponse>(
-        `${collectionPath}/login`,
-        data,
-      );
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching login:', error);
-      throw error;
-    }
+    const response = await apiClient.post<LoginResponse>(
+      `${collectionPath}/login`,
+      data,
+    );
+    return response.data;
   },
   refresh: async (data) => {
-    try {
-      const response = await apiClient.post<RefreshResponse>(
-        `${collectionPath}/refresh`,
-        data,
-      );
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching refresh:', error);
-      throw error;
-    }
+    const response = await apiClient.post<RefreshResponse>(
+      `${collectionPath}/refresh`,
+      data,
+    );
+    return response.data;
   },
 };

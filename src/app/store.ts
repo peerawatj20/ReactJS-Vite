@@ -17,9 +17,10 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import authReducer, { logout } from '@/shared/state/auth.slice';
 import loadingReducer from '@/shared/state/loading.slice';
 import notificationReducer from '@/shared/state/notification.slice';
+
+import authReducer, { logout } from '@/features/auth/state/auth.slice';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',

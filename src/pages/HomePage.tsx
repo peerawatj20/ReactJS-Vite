@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/app/hooks';
 
-import { selectCurrentUser } from '@/shared/state/auth.selectors';
+import { selectCurrentUser } from '@/features/auth/state/auth.selectors';
 
 const HomePage = () => {
   // ดึงข้อมูล user ที่ login อยู่จาก Redux store

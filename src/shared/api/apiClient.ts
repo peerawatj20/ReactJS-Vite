@@ -2,10 +2,10 @@ import i18n from '@/app/i18n';
 import type { AppDispatch, RootState } from '@/app/store';
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
-import { refreshAccessToken } from '@/features/auth/state/authFlow.thunk';
+import { refreshAccessToken } from '@/features/auth/state/auth.slice';
 
+import { logout } from '../../features/auth/state/auth.slice';
 import { ApiErrorCode } from '../constants/api.constants';
-import { logout } from '../state/auth.slice';
 import type { ApiError } from '../types/error.types';
 
 const apiClient = axios.create({

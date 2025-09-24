@@ -1,19 +1,18 @@
 import { useTranslation } from 'react-i18next';
 
-import { useAppDispatch } from '@/app/hooks';
-
 import useAppForm from '@/shared/hooks/useAppForm';
 import { useI18nZodResolver } from '@/shared/hooks/useI18nZodResolver';
 import Button from '@/shared/ui/common/Button';
 import Label from '@/shared/ui/common/Label';
 import Input from '@/shared/ui/form/Input';
 
+import { useAuthActions } from '../hooks/useAuthActions';
 import { type LoginSchemaType, loginSchema } from '../schemas/login.schema';
-import { loginFlow } from '../state/authFlow.thunk';
 
 const LoginForm = () => {
   const { i18n } = useTranslation();
-  const dispatch = useAppDispatch();
+
+  const { handleLogin } = useAuthActions();
 
   const { control, handleSubmit } = useAppForm<LoginSchemaType>({
     resolver: useI18nZodResolver(loginSchema),
@@ -24,7 +23,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
-    dispatch(loginFlow(data));
+    handleLogin(data);
   };
 
   return (

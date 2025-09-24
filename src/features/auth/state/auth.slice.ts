@@ -1,15 +1,28 @@
 import i18n from '@/app/i18n';
 import type { RootState } from '@/app/store';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { authService } from '@/shared/services/auth.service';
 import { usersService } from '@/shared/services/users.service';
 import { withAppFlowHandler } from '@/shared/utils/thunk.utils';
 
+import type { User } from '../../../shared/types/user.types';
 import type { LoginSchemaType } from '../schemas/login.schema';
 
-export const loginFlow = createAsyncThunk(
-  'auth/loginFlow',
+interface AuthState {
+  user: User | null;
+  accessToken: string | null;
+  refreshToken: string | null;
+}
+
+const initialState: AuthState = {
+  user: null,
+  accessToken: null,
+  refreshToken: null,
+};
+
+export const login = createAsyncThunk(
+  'auth/login',
   withAppFlowHandler(
     i18n.t('translation:features.auth.login.flowName', {
       postProcess: 'returnKey',
@@ -43,3 +56,36 @@ export const refreshAccessToken = createAsyncThunk(
     }
   },
 );
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.accessToken = null;
+      state.refreshToken = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state) => {
+        state.user = null;
+        state.accessToken = null;
+        state.refreshToken = null;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+      })
+      .addCase(login.rejected, (state) => {
+        state.user = null;
+        state.accessToken = null;
+        state.refreshToken = null;
+      });
+  },
+});
+
+export const { logout } = authSlice.actions;
+export default authSlice.reducer;

@@ -1,15 +1,11 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useAppSelector } from '@/app/hooks';
 
-import { selectCurrentUser } from '@/shared/state/auth.selectors';
-import { logout } from '@/shared/state/auth.slice';
+import { useAuthActions } from '@/features/auth/hooks/useAuthActions';
+import { selectCurrentUser } from '@/features/auth/state/auth.selectors';
 
 const Header = () => {
   const user = useAppSelector(selectCurrentUser);
-  const dispatch = useAppDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
+  const { handleLogout } = useAuthActions();
 
   return (
     <header className="flex h-16 items-center justify-between bg-white px-8 shadow-md">

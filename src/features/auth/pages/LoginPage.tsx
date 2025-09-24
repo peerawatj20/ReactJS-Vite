@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '@/app/hooks';
 
-import { selectIsLoggedIn } from '@/shared/state/auth.selectors';
+import { selectIsLoggedIn } from '@/features/auth/state/auth.selectors';
 
-import LoginForm from '../features/auth/components/LoginForm';
+import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {
   const navigate = useNavigate();

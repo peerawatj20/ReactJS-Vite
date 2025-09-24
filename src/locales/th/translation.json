@@ -3,6 +3,10 @@
     "auth": {
       "login": {
         "flowName": "การเข้าสู่ระบบ",
+        "label": {
+          "email": "อีเมล",
+          "password": "รหัสผ่าน"
+        },
         "validation": {
           "invalid_email": "รูปแบบอีเมลไม่ถูกต้อง",
           "password_required": "กรุณากรอกรหัสผ่าน"

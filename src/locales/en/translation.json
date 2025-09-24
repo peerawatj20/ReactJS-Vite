@@ -3,6 +3,10 @@
     "auth": {
       "login": {
         "flowName": "Login",
+        "label": {
+          "email": "E-mail",
+          "password": "Password"
+        },
         "validation": {
           "invalid_email": "Invalid email format",
           "password_required": "Password is required"

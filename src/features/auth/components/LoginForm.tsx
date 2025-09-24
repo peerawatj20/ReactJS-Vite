@@ -10,7 +10,7 @@ import { useAuthActions } from '../hooks/useAuthActions';
 import { type LoginSchemaType, loginSchema } from '../schemas/login.schema';
 
 const LoginForm = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const { handleLogin } = useAuthActions();
 
@@ -31,7 +31,9 @@ const LoginForm = () => {
       <Button onClick={() => i18n.changeLanguage('en')}>English</Button>
       <Button onClick={() => i18n.changeLanguage('th')}>ไทย</Button>
       <div>
-        <Label htmlFor="email">E-mail</Label>
+        <Label htmlFor="email">
+          {t('translation:features.auth.login.label.email')}
+        </Label>
         <Input<LoginSchemaType>
           name="email"
           type="email"
@@ -42,7 +44,9 @@ const LoginForm = () => {
       </div>
 
       <div>
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">
+          {t('translation:features.auth.login.label.password')}
+        </Label>
         <Input<LoginSchemaType>
           name="password"
           type="password"

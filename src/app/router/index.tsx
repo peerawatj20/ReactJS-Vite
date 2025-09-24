@@ -1,11 +1,10 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
+import { MainLayout } from '@/components/layouts/MainLayout';
+import { RootLayout } from '@/components/layouts/RootLayout';
 import ProtectedRoute from '@/components/router/ProtectedRoute';
 
 import LoginPage from '@/features/auth/pages/LoginPage';
-
-import { MainLayout } from '@/widgets/layout/MainLayout';
-import { RootLayout } from '@/widgets/layout/RootLayout';
 
 import HomePage from '@/pages/HomePage';
 

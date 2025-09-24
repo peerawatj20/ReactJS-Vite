@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const envSchema = z.object({
-  VITE_API_BASE_URL: z.string().url('VITE_API_BASE_URL must be a valid URL'),
+  VITE_API_BASE_URL: z.url('VITE_API_BASE_URL must be a valid URL'),
 
   //   VITE_GOOGLE_MAPS_API_KEY: z
   //     .string()
@@ -16,7 +16,10 @@ try {
   envConfig = envSchema.parse(import.meta.env);
 } catch (error) {
   if (error instanceof z.ZodError) {
-    console.error('🔥 Invalid environment variables:', error.format());
+    console.error(
+      '🔥 Invalid environment variables 🔥\n%s',
+      z.prettifyError(error),
+    );
     throw new Error(
       'Invalid environment variables. Please check your .env file.',
     );

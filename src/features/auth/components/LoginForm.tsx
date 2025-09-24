@@ -4,7 +4,6 @@ import { useAppDispatch } from '@/app/hooks';
 
 import useAppForm from '@/shared/hooks/useAppForm';
 import { useI18nZodResolver } from '@/shared/hooks/useI18nZodResolver';
-import { logout } from '@/shared/state/auth.slice';
 import Button from '@/shared/ui/common/Button';
 import Label from '@/shared/ui/common/Label';
 import Input from '@/shared/ui/form/Input';
@@ -25,12 +24,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
-    const res = await dispatch(loginFlow(data)).unwrap();
-    console.log('res', res);
-
-    setTimeout(() => {
-      dispatch(logout());
-    }, 1000);
+    dispatch(loginFlow(data));
   };
 
   return (

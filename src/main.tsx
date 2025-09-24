@@ -11,6 +11,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import router from './app/router';
 import { persistor, store } from './app/store';
+import { setupAxiosInterceptors } from './shared/api/apiClient';
+
+setupAxiosInterceptors(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(

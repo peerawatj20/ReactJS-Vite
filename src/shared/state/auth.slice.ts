@@ -6,12 +6,14 @@ import type { User } from '../types/user.types';
 
 interface AuthState {
   user: User | null;
-  token: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
-  token: null,
+  accessToken: null,
+  refreshToken: null,
 };
 
 const authSlice = createSlice({
@@ -20,22 +22,26 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.token = null;
+      state.accessToken = null;
+      state.refreshToken = null;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginFlow.pending, (state) => {
         state.user = null;
-        state.token = null;
+        state.accessToken = null;
+        state.refreshToken = null;
       })
       .addCase(loginFlow.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
       })
       .addCase(loginFlow.rejected, (state) => {
         state.user = null;
-        state.token = null;
+        state.accessToken = null;
+        state.refreshToken = null;
       });
   },
 });

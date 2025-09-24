@@ -1,0 +1,8 @@
+export const ApiErrorCode = {
+  TOKEN_EXPIRED: 'TOKEN_EXPIRED',
+  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
+  INSUFFICIENT_PERMISSION: 'INSUFFICIENT_PERMISSION',
+  VALIDATION_FAILED: 'VALIDATION_FAILED',
+} as const;
+
+export type ApiErrorCodeType = keyof typeof ApiErrorCode;

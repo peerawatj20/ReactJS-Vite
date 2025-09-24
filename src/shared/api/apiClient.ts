@@ -1,5 +1,6 @@
 import i18n from '@/app/i18n';
 import type { AppDispatch, RootState } from '@/app/store';
+import { config } from '@/config/app.config';
 import axios, { AxiosError } from 'axios';
 
 import { refreshAccessToken } from '@/features/auth/state/auth.slice';
@@ -9,7 +10,7 @@ import { ApiErrorCode } from '../constants/api.constants';
 import type { ApiError } from '../types/error.types';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: config.apiBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },

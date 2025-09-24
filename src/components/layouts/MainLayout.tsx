@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
+import SuspenseWrapper from '../router/SuspenseWrapper';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
@@ -10,8 +11,9 @@ export function MainLayout() {
       <div className="flex flex-1 flex-col">
         <Header />
         <main className="flex-1 overflow-y-auto p-8">
-          {/* 👇 เนื้อหาของแต่ละ Page (เช่น MainPage) จะถูก render ตรงนี้ */}
-          <Outlet />
+          <SuspenseWrapper>
+            <Outlet />
+          </SuspenseWrapper>
         </main>
       </div>
     </div>

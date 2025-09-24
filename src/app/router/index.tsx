@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { MainLayout } from '@/components/layouts/MainLayout';
@@ -6,7 +7,13 @@ import ProtectedRoute from '@/components/router/ProtectedRoute';
 
 import LoginPage from '@/features/auth/pages/LoginPage';
 
-import HomePage from '@/pages/HomePage';
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const ProductDetailPage = lazy(
+  () => import('@/features/products/pages/ProductDetailPage'),
+);
+const ProductListPage = lazy(
+  () => import('@/features/products/pages/ProductListPage'),
+);
 
 const router = createBrowserRouter([
   {
@@ -34,11 +41,17 @@ const router = createBrowserRouter([
               },
               {
                 path: 'products',
-                element: <HomePage />,
+                element: <ProductListPage />,
               },
               {
                 path: 'products/:productId',
-                element: <HomePage />,
+                element: <ProductDetailPage />,
+                loader: async ({ params }) => {
+                  const response = await fetch(
+                    `/api/products/${params.productId}`,
+                  );
+                  return response.json();
+                },
               },
             ],
           },

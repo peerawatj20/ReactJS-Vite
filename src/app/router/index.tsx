@@ -1,19 +1,13 @@
-import { lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { MainLayout } from '@/components/layouts/MainLayout';
 import { RootLayout } from '@/components/layouts/RootLayout';
 import ProtectedRoute from '@/components/router/ProtectedRoute';
 
-import LoginPage from '@/features/auth/pages/LoginPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 
-const HomePage = lazy(() => import('@/pages/HomePage'));
-const ProductDetailPage = lazy(
-  () => import('@/features/products/pages/ProductDetailPage'),
-);
-const ProductListPage = lazy(
-  () => import('@/features/products/pages/ProductListPage'),
-);
+import { protectedRoutes } from './protected.routes';
+import { publicRoutes } from './public.routes';
 
 const router = createBrowserRouter([
   {
@@ -24,38 +18,20 @@ const router = createBrowserRouter([
         index: true,
         element: <Navigate to="/login" replace />,
       },
-      {
-        path: 'login',
-        element: <LoginPage />,
-      },
+      ...publicRoutes,
       {
         element: <ProtectedRoute />,
         children: [
           {
             path: '/',
             element: <MainLayout />,
-            children: [
-              {
-                path: 'home',
-                element: <HomePage />,
-              },
-              {
-                path: 'products',
-                element: <ProductListPage />,
-              },
-              {
-                path: 'products/:productId',
-                element: <ProductDetailPage />,
-                loader: async ({ params }) => {
-                  const response = await fetch(
-                    `/api/products/${params.productId}`,
-                  );
-                  return response.json();
-                },
-              },
-            ],
+            children: [...protectedRoutes],
           },
         ],
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },

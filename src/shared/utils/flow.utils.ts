@@ -41,10 +41,10 @@ export const withAppFlowHandler = <Returned, ThunkArg = void>(
  */
 export const getFlowName = (
   feature: string,
-  page: string,
+  component: string,
   flowKey: string,
 ): string => {
-  const i18nKey = `translation:features.${feature}.${page}.flowName.${flowKey}`;
+  const i18nKey = `translation:features.${feature}.${component}.flowName.${flowKey}`;
 
   return i18n.t(i18nKey, {
     postProcess: 'returnKey',

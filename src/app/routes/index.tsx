@@ -3,6 +3,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { MainLayout } from '@/components/layouts/MainLayout';
 import { RootLayout } from '@/components/layouts/RootLayout';
 import ProtectedRoute from '@/components/router/ProtectedRoute';
+import PublicRoute from '@/components/router/PublicRoute';
 
 import NotFoundPage from '@/pages/NotFoundPage';
 
@@ -18,14 +19,17 @@ const router = createBrowserRouter([
         index: true,
         element: <Navigate to="/login" replace />,
       },
-      ...publicRoutes,
+      {
+        element: <PublicRoute />,
+        children: publicRoutes,
+      },
       {
         element: <ProtectedRoute />,
         children: [
           {
             path: '/',
             element: <MainLayout />,
-            children: [...protectedRoutes],
+            children: protectedRoutes,
           },
         ],
       },

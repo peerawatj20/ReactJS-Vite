@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '@/app/hooks';
 
-import Loading from '@/shared/ui/global/Loading';
-import Notification from '@/shared/ui/global/Notification';
-
 import { selectIsLoggedIn } from '@/features/auth/state/auth.selectors';
 
-export function RootLayout() {
+const PublicRoute = () => {
   const navigate = useNavigate();
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
@@ -19,11 +16,11 @@ export function RootLayout() {
     }
   }, [isLoggedIn, navigate]);
 
-  return (
-    <>
-      <Loading />
-      <Notification />
-      <Outlet />
-    </>
-  );
-}
+  if (isLoggedIn) {
+    return <Navigate to="/home" replace />;
+  }
+
+  return <Outlet />;
+};
+
+export default PublicRoute;

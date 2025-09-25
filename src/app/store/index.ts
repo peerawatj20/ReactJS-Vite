@@ -23,7 +23,7 @@ import notificationReducer from '@/shared/state/notification.slice';
 
 import authReducer, { logout } from '@/features/auth/state/auth.slice';
 
-import { featureReducer } from './featureReducer';
+import { domainReducer as domain } from './domainReducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -36,7 +36,7 @@ const appReducer = combineReducers({
   notification: notificationReducer,
   auth: authReducer,
   [baseApi.reducerPath]: baseApi.reducer,
-  feartures: featureReducer,
+  domain,
 });
 
 const rootReducer = (state: any, action: any) => {

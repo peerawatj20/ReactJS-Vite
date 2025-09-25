@@ -2,7 +2,9 @@
   "features": {
     "auth": {
       "login": {
-        "flowName": "การเข้าสู่ระบบ",
+        "flowName": {
+          "loginFlow": "การเข้าสู่ระบบ"
+        },
         "label": {
           "email": "อีเมล",
           "password": "รหัสผ่าน"

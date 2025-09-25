@@ -2,7 +2,9 @@
   "features": {
     "auth": {
       "login": {
-        "flowName": "Login",
+        "flowName": {
+          "loginFlow": "Login"
+        },
         "label": {
           "email": "E-mail",
           "password": "Password"

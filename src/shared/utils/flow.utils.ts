@@ -31,3 +31,22 @@ export const withAppFlowHandler = <Returned, ThunkArg = void>(
     }
   };
 };
+
+/**
+ * สร้าง i18n key สำหรับ flow name และ return key นั้นออกมา
+ * @param feature - ชื่อของ feature (e.g., 'auth')
+ * @param page - ชื่อของหน้า (e.g., 'login')
+ * @param flowKey - ชื่อของ flow (e.g., 'loginFlow')
+ * @returns {string} i18n key ที่สมบูรณ์
+ */
+export const getFlowName = (
+  feature: string,
+  page: string,
+  flowKey: string,
+): string => {
+  const i18nKey = `translation:features.${feature}.${page}.flowName.${flowKey}`;
+
+  return i18n.t(i18nKey, {
+    postProcess: 'returnKey',
+  });
+};

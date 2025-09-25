@@ -1,10 +1,9 @@
-import i18n from '@/app/i18n';
 import type { RootState } from '@/app/store';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { authService } from '@/shared/services/auth.service';
 import { usersService } from '@/shared/services/users.service';
-import { withAppFlowHandler } from '@/shared/utils/thunk.utils';
+import { getFlowName, withAppFlowHandler } from '@/shared/utils/flow.utils';
 
 import type { User } from '../../../shared/types/user.types';
 import type { LoginSchemaType } from '../schemas/login.schema';
@@ -24,9 +23,7 @@ const initialState: AuthState = {
 export const login = createAsyncThunk(
   'auth/login',
   withAppFlowHandler(
-    i18n.t('translation:features.auth.login.flowName', {
-      postProcess: 'returnKey',
-    }),
+    getFlowName('auth', 'login', 'loginFlow'),
     async (credentials: LoginSchemaType) => {
       const { accessToken, refreshToken } = await authService.login({
         email: credentials.email,

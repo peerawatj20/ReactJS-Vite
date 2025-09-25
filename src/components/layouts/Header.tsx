@@ -1,11 +1,10 @@
-import { useAppSelector } from '@/app/hooks';
-
-import { useAuthActions } from '@/features/auth/hooks/useAuthActions';
-import { selectCurrentUser } from '@/features/auth/state/auth.selectors';
+import { useAuthAction } from '@/features/auth/hooks/useAuthAction';
+import { useAuthState } from '@/features/auth/hooks/useAuthState';
 
 const Header = () => {
-  const user = useAppSelector(selectCurrentUser);
-  const { handleLogout } = useAuthActions();
+  const { user } = useAuthState();
+
+  const { handleLogout } = useAuthAction();
 
   return (
     <header className="flex h-16 items-center justify-between bg-white px-8 shadow-md">

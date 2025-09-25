@@ -6,13 +6,13 @@ import Button from '@/shared/ui/common/Button';
 import Label from '@/shared/ui/common/Label';
 import Input from '@/shared/ui/form/Input';
 
-import { useAuthActions } from '../hooks/useAuthActions';
+import { useAuthAction } from '../hooks/useAuthAction';
 import { type LoginSchemaType, loginSchema } from '../schemas/login.schema';
 
 const LoginForm = () => {
   const { t } = useTranslation();
 
-  const { handleLogin } = useAuthActions();
+  const { handleLogin } = useAuthAction();
 
   const { control, handleSubmit } = useAppForm<LoginSchemaType>({
     resolver: useI18nZodResolver(loginSchema),
@@ -23,7 +23,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
-    handleLogin(data);
+    await handleLogin(data);
   };
 
   return (

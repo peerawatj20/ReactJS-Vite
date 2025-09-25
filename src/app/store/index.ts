@@ -17,10 +17,13 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import { baseApi } from '@/shared/api/baseApi';
 import loadingReducer from '@/shared/state/loading.slice';
 import notificationReducer from '@/shared/state/notification.slice';
 
 import authReducer, { logout } from '@/features/auth/state/auth.slice';
+
+import { featureReducer } from './featureReducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -32,6 +35,8 @@ const appReducer = combineReducers({
   loading: loadingReducer,
   notification: notificationReducer,
   auth: authReducer,
+  [baseApi.reducerPath]: baseApi.reducer,
+  feartures: featureReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -53,7 +58,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(baseApi.middleware),
 });
 
 export const persistor = persistStore(store);

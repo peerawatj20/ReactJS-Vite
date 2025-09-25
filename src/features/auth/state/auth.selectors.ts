@@ -1,6 +1,9 @@
 import type { RootState } from '@/app/store';
 
-export const selectIsLoggedIn = (state: RootState): boolean =>
-  !!state.auth.accessToken;
+export const selectAuthState = (state: RootState) => state.auth;
 
-export const selectCurrentUser = (state: RootState) => state.auth.user;
+export const selectIsLoggedIn = (state: RootState): boolean =>
+  !!selectAuthState(state).accessToken;
+
+export const selectCurrentUser = (state: RootState) =>
+  selectAuthState(state).user;

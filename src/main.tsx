@@ -9,7 +9,7 @@ import '@/app/i18n';
 import '@/styles/index.css';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import router from './app/router';
+import router from './app/routes';
 import { persistor, store } from './app/store';
 import { setupAxiosInterceptors } from './shared/api/apiClient';
 

@@ -117,8 +117,6 @@ export const setupAxiosInterceptors = (store: AppStore) => {
 
       if (axios.isAxiosError(error)) {
         switch (status) {
-          case 401:
-
           case 403: // Forbidden
             error.message = i18n.t('common:error.api.forbidden');
             break;

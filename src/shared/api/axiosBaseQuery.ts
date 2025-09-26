@@ -9,13 +9,11 @@ import { logout, refreshAccessToken } from '@/features/auth/state/auth.slice';
 import { ApiErrorCode } from '../constants/api.constants';
 import type { ApiError } from '../types/error.types';
 
-// สร้าง Axios instance ที่ "สะอาด" (ไม่มี interceptor)
 const axiosInstance = axios.create({
   baseURL: config.apiBaseUrl,
   headers: { 'Content-Type': 'application/json' },
 });
 
-// --- ส่วนจัดการคิว (ยังคงเป็น Global ใน Module นี้) ---
 let isRefreshing = false;
 let failedQueue: Array<{
   resolve: (value: any) => void;
@@ -29,18 +27,19 @@ const processQueue = (error: Error | null, token: string | null = null) => {
   failedQueue = [];
 };
 
-// --- axiosBaseQuery ---
-export const axiosBaseQuery: BaseQueryFn<
-  {
-    url: string;
-    method?: AxiosRequestConfig['method'];
-    body?: AxiosRequestConfig['data'];
-    params?: AxiosRequestConfig['params'];
-    headers?: AxiosRequestConfig['headers'];
-  },
-  unknown,
-  {}
-> = async (args, thunkAPI) => {
+interface CustomArgs {
+  url: string;
+  method?: AxiosRequestConfig['method'];
+  body?: AxiosRequestConfig['data'];
+  params?: AxiosRequestConfig['params'];
+  headers?: AxiosRequestConfig['headers'];
+  showLoading?: boolean;
+}
+
+export const axiosBaseQuery: BaseQueryFn<CustomArgs, unknown, {}> = async (
+  args,
+  thunkAPI,
+) => {
   const { url, method = 'get', body, params, headers: baseHeaders } = args;
   const { getState, dispatch } = thunkAPI;
 
